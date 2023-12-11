@@ -1,0 +1,14 @@
+import pandas as pd
+
+def generate_car_matrix(dataframe):
+# Read the CSV file into a DataFrame
+df = pd.read_csv(dataframe)
+
+# Pivot the DataFrame to create the desired matrix
+matrix = df.pivot(index='id_1', columns='id_2', values='car').fillna(0)
+
+# Set diagonal values to 0
+for i in range(min(matrix.shape)):
+    matrix.iloc[i, i] = 0
+
+return matrix
